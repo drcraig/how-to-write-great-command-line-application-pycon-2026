@@ -1,11 +1,11 @@
 # how-to-write-great-command-line-application-pycon-2026
 Code samples from my PyCon US 2026 talk "How To Write a Great Command Line Application"
 
-1. print_args.py
-2. equals.py
-3. greater_than.py
-4. wc.py
-5. fibonacci.py
+1. [print_args.py]
+2. [equals.py]
+3. [greater_than.py]
+4. [wc.py]
+5. [fibonacci.py]
 
 Good patterns to follow with argparse:
 * Use a shebang with uv to specify your third party dependencies.
