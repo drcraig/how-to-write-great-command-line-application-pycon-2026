@@ -5,7 +5,8 @@ Code samples from my PyCon US 2026 talk "How To Write a Great Command Line Appli
 2. [equals.py](equals.py)
 3. [greater_than.py](greater_than.py)
 4. [wc.py](wc.py)
-5. [fibonacci.py](fibonacci.py)
+5. [file_type_replacements.py](file_type_replacements.py)
+6. [fibonacci.py](fibonacci.py)
 
 Good patterns to follow with argparse:
 * Use a shebang with uv to specify your third party dependencies.
@@ -68,4 +69,50 @@ if __name__ == "__main__":
         devnull = os.open(os.devnull, os.O_WRONLY)
         os.dup2(devnull, sys.stdout.fileno())
         sys.exit(0)
+```
+
+Alternatives to FileType?
+```python
+import sys
+from argparse import ArgumentParser
+from contextlib import nullcontext
+from io import IOBase
+from pathlib import Path
+
+
+def open_file_or_io(file_path_or_io, *args, **kwargs):
+    """Return the open() context manager for a file,
+    or a null context manager an existing file object."""
+    if isinstance(file_path_or_io, IOBase):
+        return nullcontext(file_path_or_io)
+    return open(file_path_or_io, *args, **kwargs)
+
+
+def PathOrStreamType(stream):
+    """Factory function to create a type that will
+    use a stream if the argument is "-", otherwise
+    cast the argument into a Path."""
+
+    def _path_or_stream(arg):
+        if arg == "-":
+            return stream
+        return Path(arg)
+
+    return _path_or_stream
+```
+```python
+parser = ArgumentParser()
+parser.add_argument(
+    "outfile",
+    type=PathOrStreamType(sys.stdout),
+    default=sys.stdout,
+    nargs="?"
+)
+
+args = parser.parse_args([])
+args = parser.parse_args(["-"])
+args = parser.parse_args(["foo.txt"])
+
+with open_file_or_io(args.outfile, 'w') as fobj:
+    fobj.write("foo")
 ```
