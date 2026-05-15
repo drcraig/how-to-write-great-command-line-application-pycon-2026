@@ -1,4 +1,12 @@
 # how-to-write-great-command-line-application-pycon-2026
+
+> Want to talk about space and Python at PyCon?
+>
+> Join us for at Varda @ PyCon In-Space Happy Hour
+> Friday, May 15, 2026, 7:30pm.
+>
+> RSVP for venue details at https://luma.com/7kta2vei
+
 Code samples from my PyCon US 2026 talk "How To Write a Great Command Line Application"
 
 1. [print_args.py](print_args.py)
