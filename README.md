@@ -7,7 +7,7 @@
 >
 > RSVP for venue details at https://luma.com/7kta2vei
 
-Code samples from my PyCon US 2026 talk "How To Write a Great Command Line Application"
+Code samples from my PyCon US 2026 talk "How To Write a Great Command Line Application" ([Slides](<How To Write a Great Command Line Application.pdf>))
 
 1. [print_args.py](print_args.py)
 2. [equals.py](equals.py)
